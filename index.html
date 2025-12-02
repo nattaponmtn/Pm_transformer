@@ -153,4 +153,110 @@ const ElectricalReport = () => {
                 <tbody className="divide-y divide-slate-100 print:divide-slate-200">
                   <tr>
                     <td className="px-6 py-4 font-medium">Main Circuit Breakers</td>
-                    <td className="px-6 py-4">ค่าความต้านทานหน้าสัมผัส (Contact Resis
+                    <td className="px-6 py-4">ค่าความต้านทานหน้าสัมผัส (Contact Resistance) ปกติทุกตัว</td>
+                    <td className="px-6 py-4"><span className="text-emerald-600 font-bold flex items-center gap-1"><CheckCircle size={14}/> Passed</span></td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 font-medium">สายเมนแรงต่ำ (Feeder Cable)</td>
+                    <td className="px-6 py-4">ค่าความเป็นฉนวนสูงมาก (150 - 200 GΩ)</td>
+                    <td className="px-6 py-4"><span className="text-emerald-600 font-bold flex items-center gap-1"><CheckCircle size={14}/> Passed</span></td>
+                  </tr>
+                  <tr>
+                    <td className="px-6 py-4 font-medium">อุณหภูมิจุดต่อ (Hotspot)</td>
+                    <td className="px-6 py-4">ไม่พบจุดร้อนผิดปกติ (ขันแน่นทุกจุดแล้ว)</td>
+                    <td className="px-6 py-4"><span className="text-emerald-600 font-bold flex items-center gap-1"><CheckCircle size={14}/> Passed</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          {/* Section 3: Capacitor Bank */}
+          <section className="break-inside-avoid">
+            <div className="flex items-center gap-2 mb-4">
+              <Activity className="text-slate-700" />
+              <h2 className="text-xl font-bold text-slate-800 border-b-2 border-slate-200 pb-1 w-full">
+                3. คาปาซิเตอร์ (Capacitor Bank)
+              </h2>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-2">
+              {[1, 2, 3, 4, 6].map((num) => (
+                <CapacitorBox key={num} num={num} status="Normal" />
+              ))}
+              <CapacitorBox num={5} status="Defective" />
+            </div>
+            
+            <div className="mt-3 text-sm text-slate-600 bg-red-50 p-3 rounded border border-red-100 print:bg-red-50 print:border-red-200">
+              <span className="font-bold text-red-600">การดำเนินการ:</span> ตัดวงจร Capacitor No.5 ออกจากระบบเรียบร้อยแล้ว (Isolated) รอการเปลี่ยนอะไหล่ตามแผนงานภายใน
+            </div>
+          </section>
+
+          {/* Recommendations Footer */}
+          <div className="bg-slate-100 rounded-xl p-6 border border-slate-200 break-inside-avoid print:bg-slate-100 print:border-slate-300">
+            <h3 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
+              <AlertTriangle className="text-amber-500" size={20} />
+              แผนการดำเนินงานและข้อเสนอแนะ (Action Plan)
+            </h3>
+            <ul className="list-disc list-inside space-y-2 text-sm text-slate-700">
+              <li>
+                <strong>เฝ้าระวังพิเศษ:</strong> ตรวจสอบสีของสารดูดความชื้น (Silica Gel) ที่หม้อแปลงถี่ขึ้น (แนะนำทุกเดือน) เนื่องจากมีความชื้นจากพัดลมระบายอากาศ
+              </li>
+              <li>
+                <strong>งานซ่อมบำรุง:</strong> จัดหาและเปลี่ยน Capacitor No.5 (ดำเนินการเองโดยทีมงานภายใน)
+              </li>
+              <li>
+                <strong>การติดตามผล:</strong> ในการ PM ปีหน้า หากค่าความเป็นฉนวนน้ำมันลดต่ำลงกว่า 22-24 kV ควรพิจารณากรองน้ำมันทันที
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        {/* Footer */}
+        <footer className="bg-slate-50 p-6 text-center text-xs text-slate-400 border-t border-slate-200 print:bg-white print:border-t">
+          <p>เอกสารสรุปผลการดำเนินงาน PM ประจำปี | จัดทำข้อมูลเมื่อ 3/10/2568</p>
+        </footer>
+      </div>
+    </div>
+  );
+};
+
+// Component ย่อยสำหรับการแสดงผล
+const StatusCard = ({ title, status, subtext, color, icon }) => (
+  <div className={`p-4 rounded-lg border border-slate-200 bg-white shadow-sm flex flex-col justify-between h-full print:border-slate-300`}>
+    <div className="flex justify-between items-start mb-2">
+      <h3 className="text-sm font-semibold text-slate-600">{title}</h3>
+      <div className={`${color} p-2 rounded-lg print:border print:border-current`}>{icon}</div>
+    </div>
+    <div>
+      <p className="text-xl font-bold text-slate-800">{status}</p>
+      <p className="text-xs text-slate-500">{subtext}</p>
+    </div>
+  </div>
+);
+
+const StatRow = ({ label, value, standard, status }) => (
+  <div className="flex justify-between items-center py-2 border-b border-slate-50 last:border-0 print:border-slate-200">
+    <span className="text-sm text-slate-600">{label}</span>
+    <div className="text-right">
+      <div className="text-sm font-bold text-slate-800">{value}</div>
+      <div className="text-xs text-slate-400">Std: {standard}</div>
+    </div>
+  </div>
+);
+
+const CapacitorBox = ({ num, status }) => {
+  const isDefective = status === 'Defective';
+  return (
+    <div className={`
+      border rounded p-3 text-center 
+      ${isDefective ? 'bg-red-50 border-red-200 print:bg-red-50' : 'bg-emerald-50 border-emerald-200 print:bg-emerald-50'}
+    `}>
+      <div className="text-xs text-slate-500 mb-1">No. {num}</div>
+      <div className={`font-bold ${isDefective ? 'text-red-600' : 'text-emerald-600'}`}>
+        {isDefective ? 'Cut-off' : 'OK'}
+      </div>
+    </div>
+  );
+};
