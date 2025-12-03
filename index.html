@@ -3,325 +3,375 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>รายงาน PM ไฟฟ้า - บริษัท ลักษณ์ธนากูล จำกัด</title>
+    <title>รายงาน PM ไฟฟ้า - Multi Site</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Sarabun', sans-serif;
-            background-color: #f8fafc;
-            color: #334155;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-        }
-        .glossary-text {
-            font-size: 0.75rem;
-            color: #64748b;
-        }
-        .card-shadow {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-        }
+        body { font-family: 'Sarabun', sans-serif; background-color: #f8fafc; color: #334155; }
+        .glossary-text { font-size: 0.75rem; color: #64748b; }
+        .card-shadow { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); }
         @media print {
             body { background-color: white; }
             .no-print { display: none !important; }
-            .shadow-sm, .shadow-md, .shadow-xl, .card-shadow { box-shadow: none !important; }
+            .shadow-xl { box-shadow: none !important; }
             .border { border-color: #e2e8f0 !important; }
-            .bg-slate-50 { background-color: #f8fafc !important; }
         }
     </style>
 </head>
-<body class="p-6 md:p-12 print:p-0">
+<body>
+    <div id="app" class="p-4 md:p-10 print:p-0">
+        
+        <div class="max-w-5xl mx-auto bg-white min-h-screen shadow-xl rounded-xl overflow-hidden print:shadow-none print:rounded-none">
 
-    <!-- Container -->
-    <div class="max-w-5xl mx-auto bg-white min-h-screen shadow-xl rounded-xl overflow-hidden print:shadow-none print:rounded-none">
-
-        <!-- Header: Premium Navy Style -->
-        <header class="bg-slate-900 text-white p-10 print:bg-slate-900 print:text-white">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-                <div>
-                    <div class="flex items-center gap-2 mb-2 opacity-80">
-                        <i data-lucide="file-check" class="w-4 h-4"></i>
-                        <span class="text-xs uppercase tracking-wider font-semibold">Official Engineering Report</span>
-                    </div>
-                    <h1 class="text-3xl font-bold tracking-tight mb-2">รายงานบำรุงรักษาระบบไฟฟ้า (PM)</h1>
-                    <p class="text-slate-300 font-light text-sm">รอบการตรวจสอบประจำปี 2568 (ตุลาคม)</p>
-                </div>
-                <div class="text-right border-l-2 border-slate-600 pl-6 flex flex-col items-end">
-                    <h2 class="text-xl font-semibold">บริษัท ลักษณ์ธนากูล จำกัด</h2>
-                    <p class="text-sm text-slate-400 mt-1 mb-4">วันที่ตรวจสอบ: 3 ตุลาคม 2568</p>
+            <!-- Header Section -->
+            <header class="text-white transition-colors duration-500" :class="company.headerColor">
+                
+                <!-- Top Bar: Company Switcher (Integrated & No Overlap) -->
+                <div class="bg-black/20 px-8 py-3 flex flex-col md:flex-row justify-between items-center gap-3 border-b border-white/10 no-print">
+                    <span class="text-[10px] uppercase font-bold tracking-widest text-white/60">Select Project Site:</span>
                     
-                    <!-- Full Report Button -->
-                    <a href="https://1drv.ms/b/c/4bb5af738151f4ed/EejbkryfqbFEgkSoRL4CBMoBiRJ-rgOHa4t2vhUpa5OEiw?e=x2C7bn" target="_blank" class="no-print inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-2 px-4 rounded transition-colors shadow-lg border border-blue-500">
-                        <i data-lucide="external-link" class="w-3 h-3"></i> อ่านรายงานฉบับเต็ม (PDF)
-                    </a>
-                </div>
-            </div>
-        </header>
-
-        <!-- Executive Summary: Modern Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-4 border-b border-slate-100">
-            <!-- Summary Item -->
-            <div class="p-8 border-r border-slate-100 last:border-r-0 hover:bg-slate-50 transition-colors">
-                <div class="text-xs text-slate-400 uppercase tracking-wide font-bold mb-2">ภาพรวมระบบ (Overall)</div>
-                <div class="flex items-center gap-3 mb-1">
-                    <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
-                    <span class="text-2xl font-bold text-slate-800">Operational</span>
-                </div>
-                <p class="text-sm text-slate-500">ระบบทำงานปกติ</p>
-            </div>
-            <div class="p-8 border-r border-slate-100 last:border-r-0 hover:bg-slate-50 transition-colors">
-                <div class="text-xs text-slate-400 uppercase tracking-wide font-bold mb-2">หม้อแปลง (TR)</div>
-                <div class="flex items-center gap-3 mb-1">
-                    <div class="w-2 h-2 rounded-full bg-amber-500"></div>
-                    <span class="text-2xl font-bold text-slate-800">Monitor</span>
-                </div>
-                <p class="text-sm text-slate-500">เฝ้าระวังคุณภาพน้ำมัน</p>
-            </div>
-            <div class="p-8 border-r border-slate-100 last:border-r-0 hover:bg-slate-50 transition-colors">
-                <div class="text-xs text-slate-400 uppercase tracking-wide font-bold mb-2">ความปลอดภัย (Safety)</div>
-                <div class="flex items-center gap-3 mb-1">
-                    <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
-                    <span class="text-2xl font-bold text-slate-800">100% Pass</span>
-                </div>
-                <p class="text-sm text-slate-500">ปลอดภัยตามมาตรฐาน</p>
-            </div>
-            <div class="p-8 hover:bg-slate-50 transition-colors">
-                <div class="text-xs text-slate-400 uppercase tracking-wide font-bold mb-2">งานซ่อมบำรุง (Action)</div>
-                <div class="flex items-center gap-3 mb-1">
-                    <div class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
-                    <span class="text-2xl font-bold text-slate-800">1 Point</span>
-                </div>
-                <p class="text-sm text-slate-500">เปลี่ยน Capacitor</p>
-            </div>
-        </div>
-
-        <!-- Content Body -->
-        <div class="p-8 md:p-12 space-y-12">
-
-            <!-- Section 1: Transformer -->
-            <section class="break-inside-avoid">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 font-bold">1</div>
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-800">หม้อแปลงไฟฟ้า (Transformer 630 kVA)</h2>
-                        <p class="glossary-text">หัวใจหลักในการแปลงไฟฟ้าแรงสูงเป็นแรงต่ำเพื่อใช้ในโรงงาน</p>
+                    <div class="flex bg-white/10 rounded-lg p-1">
+                        <button 
+                            @click="currentCompanyId = 'lakthanakul'"
+                            class="px-4 py-1.5 rounded-md text-xs font-bold transition-all flex items-center gap-2"
+                            :class="currentCompanyId === 'lakthanakul' ? 'bg-white text-slate-900 shadow-sm' : 'text-white/70 hover:text-white hover:bg-white/5'"
+                        >
+                            <i data-lucide="building" class="w-3 h-3"></i> บ.ลักษณ์ธนากูล
+                        </button>
+                        <button 
+                            @click="currentCompanyId = 'successmilk'"
+                            class="px-4 py-1.5 rounded-md text-xs font-bold transition-all flex items-center gap-2"
+                            :class="currentCompanyId === 'successmilk' ? 'bg-white text-slate-900 shadow-sm' : 'text-white/70 hover:text-white hover:bg-white/5'"
+                        >
+                            <i data-lucide="milk" class="w-3 h-3"></i> บ.ซัคเซสมิลค์
+                        </button>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Oil Quality Card -->
-                    <div class="bg-white border border-slate-200 rounded-xl p-6 card-shadow relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-amber-50 rounded-full -mr-10 -mt-10 transition-transform group-hover:scale-110"></div>
-                        
-                        <div class="relative z-10">
+                <!-- Main Header Content -->
+                <div class="p-8 md:p-10">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                        <!-- Left: Report Title -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-2 opacity-80">
+                                <i data-lucide="file-check" class="w-4 h-4"></i>
+                                <span class="text-xs uppercase tracking-wider font-semibold">Official Engineering Report</span>
+                            </div>
+                            <h1 class="text-3xl font-bold tracking-tight mb-2 leading-tight">รายงานบำรุงรักษาระบบไฟฟ้า (PM)</h1>
+                            <p class="text-slate-300 font-light text-sm">รอบการตรวจสอบ: {{ company.checkDate }}</p>
+                        </div>
+
+                        <!-- Right: Company Info & Link -->
+                        <div class="text-left md:text-right border-l-2 md:border-l-0 md:border-r-2 border-white/20 pl-6 md:pl-0 md:pr-6 w-full md:w-auto">
+                            <h2 class="text-xl font-semibold">{{ company.name }}</h2>
+                            <p class="text-sm text-slate-300 mt-1">{{ company.address }}</p>
+                            
+                            <!-- PDF Link Button -->
+                            <div v-if="company.fullReportLink" class="mt-4 no-print flex md:justify-end">
+                                <a :href="company.fullReportLink" target="_blank" class="group inline-flex items-center gap-2 text-xs font-bold bg-white text-slate-900 hover:bg-blue-50 py-2 px-4 rounded shadow-sm transition-all">
+                                    <i data-lucide="file-text" class="w-3 h-3 text-blue-600 group-hover:scale-110 transition-transform"></i> 
+                                    เปิดเอกสารฉบับเต็ม (PDF)
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Executive Summary -->
+            <div class="grid grid-cols-1 md:grid-cols-4 border-b border-slate-100 bg-slate-50/30">
+                <div v-for="(item, index) in company.summary" :key="index" class="p-6 md:p-8 border-r border-slate-100 last:border-r-0 hover:bg-slate-50 transition-colors" v-show="item.visible !== false">
+                    <div class="text-[10px] text-slate-400 uppercase tracking-widest font-bold mb-3">{{ item.label }}</div>
+                    <div class="flex items-center gap-3 mb-1">
+                        <div class="w-2.5 h-2.5 rounded-full shadow-sm" :class="item.dotColor"></div>
+                        <span class="text-xl md:text-2xl font-bold text-slate-800">{{ item.value }}</span>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-1">{{ item.desc }}</p>
+                </div>
+            </div>
+
+            <!-- Content Body -->
+            <div class="p-6 md:p-12 space-y-10">
+
+                <!-- Section 1: Transformer -->
+                <section>
+                    <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-3">
+                        <div class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-sm">1</div>
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-800">หม้อแปลงไฟฟ้า (Transformer)</h2>
+                            <p class="glossary-text">ขนาด: {{ company.transformer.size }} • S/N: {{ company.transformer.serial }}</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Oil Quality -->
+                        <div class="bg-white border border-slate-200 rounded-xl p-6 card-shadow relative overflow-hidden group">
                             <div class="flex justify-between items-start mb-4">
                                 <div>
-                                    <h3 class="font-semibold text-slate-700">คุณภาพน้ำมันหม้อแปลง</h3>
-                                    <p class="glossary-text mt-1 text-slate-500">(Dielectric Breakdown Voltage)</p>
-                                    <p class="text-xs text-blue-600 mt-1 bg-blue-50 inline-block px-2 py-0.5 rounded">
-                                        <i data-lucide="info" class="w-3 h-3 inline mr-1"></i>ค่าความทนทานไฟ (ยิ่งสูง = ยิ่งดี)
-                                    </p>
+                                    <h3 class="font-semibold text-slate-700 text-sm">คุณภาพน้ำมันหม้อแปลง</h3>
+                                    <p class="glossary-text mt-0.5 text-slate-400">(Dielectric Breakdown Voltage)</p>
                                 </div>
-                                <span class="bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full font-bold">Monitor</span>
+                                <span :class="company.transformer.oilStatusClass" class="text-[10px] uppercase tracking-wide px-2.5 py-1 rounded-full font-bold border border-current opacity-80">
+                                    {{ company.transformer.oilStatusText }}
+                                </span>
                             </div>
 
-                            <div class="mt-6">
-                                <div class="flex items-end gap-2 mb-1">
-                                    <span class="text-3xl font-bold text-slate-800">26.6</span>
-                                    <span class="text-sm font-medium text-slate-400 mb-1">kV</span>
+                            <div class="mt-4">
+                                <div class="flex items-baseline gap-2 mb-2">
+                                    <span class="text-4xl font-bold text-slate-800 tracking-tight">{{ company.transformer.oilValue }}</span>
+                                    <span class="text-sm font-medium text-slate-400">kV</span>
                                 </div>
-                                <div class="w-full bg-slate-100 rounded-full h-1.5 mb-2">
-                                    <div class="bg-gradient-to-r from-red-400 to-amber-400 h-1.5 rounded-full" style="width: 88%"></div>
+                                <div class="w-full bg-slate-100 rounded-full h-1.5 mb-2 overflow-hidden">
+                                    <div class="h-full rounded-full transition-all duration-1000 ease-out" :class="company.transformer.oilBarColor" :style="{ width: company.transformer.oilBarWidth }"></div>
                                 </div>
-                                <div class="flex justify-between text-xs font-medium">
-                                    <span class="text-amber-600">ปัจจุบัน (ต่ำกว่าเกณฑ์เล็กน้อย)</span>
-                                    <span class="text-slate-400">ค่ามาตรฐาน: > 30 kV</span>
+                                <div class="flex justify-between text-[10px] font-medium uppercase tracking-wide">
+                                    <span :class="company.transformer.oilBarTextColor">Current Value</span>
+                                    <span class="text-slate-400">Target: > 30 kV</span>
                                 </div>
                             </div>
                             
-                            <div class="mt-4 pt-4 border-t border-slate-50 text-xs text-slate-500 leading-relaxed">
-                                <strong class="text-slate-700">ความเห็นวิศวกร:</strong> ยอมรับค่านี้ได้เนื่องจากฉนวนขดลวดภายในแข็งแรงมาก แต่ต้องเฝ้าระวังสความชื้นจากสิ่งแวดล้อม (เล้าไก่) อย่างใกล้ชิด
+                            <div class="mt-5 pt-4 border-t border-slate-50 text-xs text-slate-500 leading-relaxed bg-slate-50/50 -mx-6 -mb-6 p-4">
+                                <strong class="text-slate-700 block mb-1">Engineering Assessment:</strong> {{ company.transformer.oilNote }}
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Insulation Card -->
-                    <div class="bg-white border border-slate-200 rounded-xl p-6 card-shadow">
-                         <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="font-semibold text-slate-700">สภาพฉนวนขดลวด</h3>
-                                <p class="glossary-text mt-1 text-slate-500">(Insulation Resistance)</p>
-                                <p class="text-xs text-emerald-600 mt-1 bg-emerald-50 inline-block px-2 py-0.5 rounded">
-                                    <i data-lucide="shield-check" class="w-3 h-3 inline mr-1"></i>ค่าการป้องกันไฟรั่ว (ยิ่งสูง = ยิ่งดี)
-                                </p>
+                        <!-- Insulation -->
+                        <div class="bg-white border border-slate-200 rounded-xl p-6 card-shadow">
+                             <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="font-semibold text-slate-700 text-sm">สภาพฉนวนขดลวด</h3>
+                                    <p class="glossary-text mt-0.5 text-slate-400">(Insulation Resistance)</p>
+                                </div>
+                                <span class="bg-emerald-50 text-emerald-600 text-[10px] uppercase tracking-wide px-2.5 py-1 rounded-full font-bold border border-emerald-200">Excellent</span>
                             </div>
-                            <span class="bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full font-bold">Excellent</span>
-                        </div>
 
-                        <ul class="space-y-4 mt-6">
-                            <li class="flex justify-between items-center border-b border-slate-50 pb-2">
-                                <span class="text-sm text-slate-600">ด้านแรงสูง - กราวด์</span>
-                                <span class="font-bold text-slate-800">16.0 GΩ <span class="text-xs font-normal text-slate-400 ml-1">(ดีมาก)</span></span>
-                            </li>
-                            <li class="flex justify-between items-center border-b border-slate-50 pb-2">
-                                <span class="text-sm text-slate-600">ด้านแรงต่ำ - กราวด์</span>
-                                <span class="font-bold text-slate-800">10.0 GΩ <span class="text-xs font-normal text-slate-400 ml-1">(ดีมาก)</span></span>
-                            </li>
-                        </ul>
-                        <div class="mt-4 text-xs text-emerald-600 font-medium flex items-center gap-1">
-                            <i data-lucide="check" class="w-3 h-3"></i> ปลอดภัย ไม่มีการรั่วไหล
+                            <ul class="space-y-3 mt-4">
+                                <li v-for="(ins, idx) in company.transformer.insulation" :key="idx" class="flex justify-between items-center border-b border-slate-50 pb-2 last:border-0 last:pb-0">
+                                    <span class="text-xs text-slate-500 font-medium">{{ ins.label }}</span>
+                                    <span class="font-bold text-slate-800 text-sm">{{ ins.value }} <i data-lucide="check-circle" class="w-3 h-3 text-emerald-500 inline ml-1"></i></span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- Section 2: MDB -->
-            <section class="break-inside-avoid">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 font-bold">2</div>
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-800">ตู้ MDB และความปลอดภัย</h2>
-                        <p class="glossary-text">ตู้ควบคุมไฟฟ้าหลัก จ่ายไฟไปยังส่วนต่างๆ ของโรงงาน</p>
-                    </div>
-                </div>
-
-                <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-                    <table class="w-full text-sm">
-                        <thead class="bg-slate-50 text-slate-500 uppercase text-xs font-semibold tracking-wider">
-                            <tr>
-                                <th class="px-6 py-4 text-left">รายการตรวจสอบ</th>
-                                <th class="px-6 py-4 text-left">ความหมาย / ผลตรวจ</th>
-                                <th class="px-6 py-4 text-center">สถานะ</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100">
-                            <tr>
-                                <td class="px-6 py-4 font-medium text-slate-700">Main Circuit Breaker</td>
-                                <td class="px-6 py-4 text-slate-600">
-                                    <div>ค่าความต้านทานหน้าสัมผัส (Contact Resistance)</div>
-                                    <div class="text-xs text-slate-400 mt-0.5">จุดเชื่อมต่อกระแสไฟ ยิ่งต่ำยิ่งดี ไฟเดินสะดวกไม่ร้อน</div>
-                                </td>
-                                <td class="px-6 py-4 text-center"><span class="bg-emerald-100 text-emerald-700 text-xs px-2 py-1 rounded font-bold">Pass</span></td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 font-medium text-slate-700">สายเมน (Feeder Cable)</td>
-                                <td class="px-6 py-4 text-slate-600">
-                                    <div>ค่าความเป็นฉนวนสายไฟ</div>
-                                    <div class="text-xs text-slate-400 mt-0.5">ผลวัดได้ 150-200 GΩ (สูงมาก = ปลอดภัย)</div>
-                                </td>
-                                <td class="px-6 py-4 text-center"><span class="bg-emerald-100 text-emerald-700 text-xs px-2 py-1 rounded font-bold">Pass</span></td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 font-medium text-slate-700">จุดต่อสาย (Hotspot)</td>
-                                <td class="px-6 py-4 text-slate-600">
-                                    <div>ความร้อนสะสมตามขั้วต่อ</div>
-                                    <div class="text-xs text-slate-400 mt-0.5">ขันแน่นทุกจุด ไม่พบความร้อนผิดปกติ</div>
-                                </td>
-                                <td class="px-6 py-4 text-center"><span class="bg-emerald-100 text-emerald-700 text-xs px-2 py-1 rounded font-bold">Pass</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Section 3: Capacitor -->
-            <section class="break-inside-avoid">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 font-bold">3</div>
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-800">คาปาซิเตอร์ (Capacitor Bank)</h2>
-                        <p class="glossary-text">อุปกรณ์ช่วยประหยัดค่าไฟและรักษาแรงดันให้คงที่</p>
-                    </div>
-                </div>
-
-                <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
-                    <div class="flex flex-wrap gap-2 justify-center md:justify-start mb-6">
-                        <!-- Unit Tags -->
-                        <div class="px-4 py-2 bg-white rounded border border-emerald-200 text-emerald-700 text-sm font-bold shadow-sm flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Unit 1
-                        </div>
-                        <div class="px-4 py-2 bg-white rounded border border-emerald-200 text-emerald-700 text-sm font-bold shadow-sm flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Unit 2
-                        </div>
-                        <div class="px-4 py-2 bg-white rounded border border-emerald-200 text-emerald-700 text-sm font-bold shadow-sm flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Unit 3
-                        </div>
-                        <div class="px-4 py-2 bg-white rounded border border-emerald-200 text-emerald-700 text-sm font-bold shadow-sm flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Unit 4
-                        </div>
-                        
-                        <!-- Defective Unit -->
-                        <div class="px-4 py-2 bg-red-50 rounded border border-red-200 text-red-700 text-sm font-bold shadow-sm flex items-center gap-2">
-                            <i data-lucide="power-off" class="w-3 h-3"></i> Unit 5 (Cut-off)
-                        </div>
-                        
-                        <div class="px-4 py-2 bg-white rounded border border-emerald-200 text-emerald-700 text-sm font-bold shadow-sm flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Unit 6
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-3 text-sm text-slate-600 bg-white p-4 rounded border border-slate-200 shadow-sm">
-                        <i data-lucide="alert-circle" class="text-amber-500 w-5 h-5 mt-0.5 shrink-0"></i>
+                <!-- Section 2: Inspection Table (Dynamic) -->
+                <section v-if="company.generalInspection && company.generalInspection.visible" class="break-inside-avoid">
+                    <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-3">
+                        <div class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-sm">2</div>
                         <div>
-                            <span class="font-bold text-slate-800">สถานะการแก้ไข:</span> 
-                            Capacitor ตัวที่ 5 เสื่อมสภาพ (ค่าประจุลดลง) ทีมงานได้ทำการ <span class="underline decoration-red-400 decoration-2">ตัดวงจร (Cut-off)</span> ออกจากระบบแล้วเพื่อความปลอดภัย รอการเปลี่ยนอะไหล่ตามแผนงานภายใน
+                            <h2 class="text-lg font-bold text-slate-800">{{ company.generalInspection.title }}</h2>
+                            <p class="glossary-text">{{ company.generalInspection.subtitle }}</p>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            <!-- Action Plan: Premium Card -->
-            <section class="break-inside-avoid bg-slate-900 text-white rounded-xl p-8 relative overflow-hidden shadow-2xl">
-                <!-- Decorative BG -->
-                <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2"></div>
-                
-                <h3 class="text-lg font-bold mb-6 flex items-center gap-2 relative z-10">
-                    <i data-lucide="clipboard-list" class="text-blue-400"></i>
-                    แผนการดำเนินงานและข้อเสนอแนะ (Action Plan)
-                </h3>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-                    <div class="bg-white/10 p-5 rounded-lg backdrop-blur-sm border border-white/10">
-                        <div class="text-blue-300 text-xs font-bold uppercase mb-2">Priority: High</div>
-                        <h4 class="font-bold mb-2">เฝ้าระวังพิเศษ</h4>
-                        <p class="text-sm text-slate-300 font-light leading-relaxed">
-                            ตรวจสอบสีของสารดูดความชื้น (Silica Gel) ที่หม้อแปลงทุกเดือน เนื่องจากความชื้นสูง
-                        </p>
+                    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                        <table class="w-full text-sm">
+                            <thead class="bg-slate-50 text-slate-500 uppercase text-[10px] font-bold tracking-wider border-b border-slate-200">
+                                <tr>
+                                    <th class="px-6 py-4 text-left">Inspection Item</th>
+                                    <th class="px-6 py-4 text-left">Details / Result</th>
+                                    <th class="px-6 py-4 text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr v-for="(row, idx) in company.generalInspection.rows" :key="idx" class="hover:bg-slate-50/50 transition-colors">
+                                    <td class="px-6 py-4 font-medium text-slate-700">{{ row.item }}</td>
+                                    <td class="px-6 py-4 text-slate-600">
+                                        {{ row.desc }}
+                                        <span v-if="row.subtext" class="block text-[10px] text-slate-400 mt-1 uppercase tracking-wide font-medium">{{ row.subtext }}</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-full border shadow-sm" :class="row.statusClass || 'bg-emerald-50 text-emerald-600 border-emerald-100'">{{ row.statusText || 'PASS' }}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="bg-white/10 p-5 rounded-lg backdrop-blur-sm border border-white/10">
-                        <div class="text-blue-300 text-xs font-bold uppercase mb-2">Priority: Medium</div>
-                        <h4 class="font-bold mb-2">งานซ่อมบำรุง</h4>
-                        <p class="text-sm text-slate-300 font-light leading-relaxed">
-                            จัดหาและเปลี่ยน Capacitor No.5 (ดำเนินการเองโดยทีมงานภายใน)
-                        </p>
-                    </div>
-                    <div class="bg-white/10 p-5 rounded-lg backdrop-blur-sm border border-white/10">
-                        <div class="text-blue-300 text-xs font-bold uppercase mb-2">Long Term</div>
-                        <h4 class="font-bold mb-2">ติดตามผล</h4>
-                        <p class="text-sm text-slate-300 font-light leading-relaxed">
-                            ปีหน้าหากค่าฉนวนน้ำมันต่ำกว่า 22-24 kV ให้พิจารณากรองน้ำมันทันที
-                        </p>
-                    </div>
-                </div>
-            </section>
+                </section>
 
-        </div>
+                <!-- Section 3: Capacitor (Conditional) -->
+                <section v-if="company.capacitor && company.capacitor.visible" class="break-inside-avoid">
+                    <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-3">
+                        <div class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-sm">3</div>
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-800">คาปาซิเตอร์ (Capacitor Bank)</h2>
+                            <p class="glossary-text">อุปกรณ์ปรับปรุงค่า Power Factor</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+                        <div class="flex flex-wrap gap-3 justify-center md:justify-start mb-6">
+                            <div v-for="unit in company.capacitor.units" :key="unit.id" 
+                                :class="unit.status === 'bad' ? 'bg-white border-red-200 text-red-600 ring-1 ring-red-100' : 'bg-white border-emerald-200 text-emerald-600 shadow-sm'"
+                                class="px-4 py-2.5 rounded-lg border text-sm font-bold flex items-center gap-2 min-w-[100px] justify-center transition-all">
+                                <span v-if="unit.status === 'good'" class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></span>
+                                <i v-else data-lucide="power-off" class="w-3.5 h-3.5"></i>
+                                Unit {{ unit.id }} <span v-if="unit.status === 'bad'" class="text-[10px] bg-red-50 px-1.5 py-0.5 rounded ml-1">Off</span>
+                            </div>
+                        </div>
+                        <div v-if="company.capacitor.hasIssue" class="flex items-start gap-3 text-sm text-slate-600 bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                            <div class="bg-amber-50 p-1.5 rounded text-amber-500 mt-0.5">
+                                <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <span class="font-bold text-slate-800 block mb-0.5">Maintenance Required:</span> 
+                                {{ company.capacitor.issueText }}
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-        <!-- Footer -->
-        <footer class="bg-slate-50 border-t border-slate-200 p-8 text-center text-xs text-slate-400">
-            <p>เอกสารสรุปผลการดำเนินงาน PM ประจำปี | Generated for Lakthanakul Co., Ltd.</p>
-            <div class="mt-2 no-print">
-                <a href="https://1drv.ms/b/c/4bb5af738151f4ed/EejbkryfqbFEgkSoRL4CBMoBiRJ-rgOHa4t2vhUpa5OEiw?e=x2C7bn" target="_blank" class="text-blue-500 hover:underline">
-                    ดูเอกสารต้นฉบับ (PDF)
-                </a>
+                <!-- Action Plan -->
+                <section class="break-inside-avoid bg-slate-900 text-white rounded-xl p-8 relative overflow-hidden shadow-xl">
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full mix-blend-overlay filter blur-3xl opacity-30 -translate-y-1/2 translate-x-1/3"></div>
+                    
+                    <h3 class="text-lg font-bold mb-6 flex items-center gap-2 relative z-10">
+                        <i data-lucide="clipboard-list" class="text-blue-400"></i>
+                        แผนการดำเนินงานและข้อเสนอแนะ (Action Plan)
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 relative z-10">
+                        <div v-for="(plan, idx) in company.actionPlan" :key="idx" class="bg-white/5 hover:bg-white/10 p-5 rounded-lg backdrop-blur-md border border-white/5 transition-colors group">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="w-1.5 h-1.5 rounded-full bg-blue-400 group-hover:shadow-[0_0_8px_rgba(96,165,250,0.6)] transition-shadow"></span>
+                                <span class="text-blue-200/80 text-[10px] font-bold uppercase tracking-widest">{{ plan.priority }}</span>
+                            </div>
+                            <h4 class="font-bold text-white text-sm mb-2">{{ plan.title }}</h4>
+                            <p class="text-xs text-slate-300/90 font-light leading-relaxed">{{ plan.desc }}</p>
+                        </div>
+                    </div>
+                </section>
+
             </div>
-        </footer>
 
+            <footer class="bg-white border-t border-slate-100 p-8 text-center text-xs text-slate-400">
+                <p>เอกสารสรุปผลการดำเนินงาน PM ประจำปี | Generated for {{ company.name }}</p>
+            </footer>
+        </div>
     </div>
 
     <script>
-        lucide.createIcons();
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    currentCompanyId: 'lakthanakul', // Default company
+                    db: {
+                        'lakthanakul': {
+                            name: 'บริษัท ลักษณ์ธนากูล จำกัด',
+                            address: '230 ต.นครเจดีย์ อ.ป่าซาง จ.ลำพูน',
+                            checkDate: '3 ตุลาคม 2568',
+                            headerColor: 'bg-slate-900',
+                            fullReportLink: 'https://1drv.ms/b/c/4bb5af738151f4ed/EejbkryfqbFEgkSoRL4CBMoBiRJ-rgOHa4t2vhUpa5OEiw?e=x2C7bn',
+                            summary: [
+                                { label: 'ภาพรวมระบบ', value: 'Operational', desc: 'ระบบทำงานปกติ', dotColor: 'bg-emerald-500' },
+                                { label: 'หม้อแปลง (TR)', value: 'Monitor', desc: 'เฝ้าระวังคุณภาพน้ำมัน', dotColor: 'bg-amber-500' },
+                                { label: 'ความปลอดภัย', value: '100% Pass', desc: 'ฉนวนสมบูรณ์', dotColor: 'bg-emerald-500' },
+                                { label: 'งานซ่อมบำรุง', value: '1 Point', desc: 'เปลี่ยน Capacitor', dotColor: 'bg-red-500 animate-pulse' }
+                            ],
+                            transformer: {
+                                size: '630 kVA',
+                                serial: '4950374',
+                                oilValue: '26.6',
+                                oilStatusText: 'Monitor',
+                                oilStatusClass: 'text-amber-600 bg-amber-50 border-amber-200',
+                                oilBarWidth: '88%',
+                                oilBarColor: 'bg-amber-500',
+                                oilBarTextColor: 'text-amber-600',
+                                oilNote: 'ยอมรับค่า 26.6 kV ได้ชั่วคราว เนื่องจากฉนวนขดลวดแข็งแรงมาก แต่ต้องเฝ้าระวัง Silica Gel อย่างเคร่งครัดเนื่องจากความชื้นสูง (เล้าไก่)',
+                                insulation: [
+                                    { label: 'HV - Ground', value: '16.0 GΩ' },
+                                    { label: 'LV - Ground', value: '10.0 GΩ' },
+                                    { label: 'HV - LV Winding', value: '14.0 GΩ' }
+                                ]
+                            },
+                            generalInspection: { // Reused as MDB section for Lakthanakul
+                                visible: true,
+                                title: 'ตู้ MDB และความปลอดภัย',
+                                subtitle: 'ตู้ควบคุมไฟฟ้าหลัก',
+                                rows: [
+                                    { item: 'Main Circuit Breaker', desc: 'ค่าความต้านทานหน้าสัมผัสปกติ (Contact Resistance Normal)', subtext: 'Status: Optimal' },
+                                    { item: 'สายเมน (Feeder Cable)', desc: 'ค่าฉนวนสูงมาก (150-200 GΩ) ปลอดภัย', subtext: 'Status: Safe' },
+                                    { item: 'จุดต่อสาย (Hotspot)', desc: 'ขันแน่นทุกจุด ไม่พบความร้อนสะสม', subtext: 'Status: Cool' }
+                                ]
+                            },
+                            capacitor: {
+                                visible: true,
+                                units: [
+                                    { id: 1, status: 'good' }, { id: 2, status: 'good' }, { id: 3, status: 'good' },
+                                    { id: 4, status: 'good' }, { id: 5, status: 'bad' }, { id: 6, status: 'good' }
+                                ],
+                                hasIssue: true,
+                                issueText: 'Capacitor ตัวที่ 5 เสื่อมสภาพ (-15.62%) ตัดวงจร (Cut-off) ออกแล้ว รอเปลี่ยนอะไหล่'
+                            },
+                            actionPlan: [
+                                { priority: 'Priority: High', title: 'เฝ้าระวังพิเศษ', desc: 'ตรวจสอบสารดูดความชื้น (Silica Gel) ทุกเดือน' },
+                                { priority: 'Priority: Medium', title: 'งานซ่อมบำรุง', desc: 'เปลี่ยน Capacitor No.5 (ดำเนินการเอง)' },
+                                { priority: 'Long Term', title: 'ติดตามผล', desc: 'ปีหน้าหากค่าน้ำมันต่ำกว่า 22-24 kV ให้พิจารณากรองน้ำมัน' }
+                            ]
+                        },
+                        'successmilk': {
+                            name: 'บริษัท ซัคเซสมิลค์ จำกัด',
+                            address: 'TR.1 - PEA: 65-111471',
+                            checkDate: '15 ตุลาคม 2568',
+                            headerColor: 'bg-indigo-900',
+                            fullReportLink: 'https://onedrive.live.com/?redeem=aHR0cHM6Ly8xZHJ2Lm1zL2IvYy80YmI1YWY3MzgxNTFmNGVkL0VVVmpyQjBfd0ZOQnZpX01pc0tpVE1RQkMxSmpBc1NaeDNYSzNGcm42V1g2eFE%5FZT1zSGNmR0g&cid=4BB5AF738151F4ED&id=4BB5AF738151F4ED%21s1dac6345c03f4153be2fcc8ac2a24cc4&parId=4BB5AF738151F4ED%21219&o=OneUp',
+                            summary: [
+                                { label: 'สถานะหม้อแปลง', value: 'Good', desc: 'สภาพสมบูรณ์พร้อมใช้', dotColor: 'bg-emerald-500' },
+                                { label: 'คุณภาพน้ำมัน', value: 'Pass', desc: 'ค่าความเป็นฉนวนสูง', dotColor: 'bg-emerald-500' },
+                                { label: 'ความสะอาด', value: 'Cleaned', desc: 'ทำความสะอาดคราบสกปรกแล้ว', dotColor: 'bg-blue-500' },
+                                { label: 'ส่วนอื่น (MDB/Cap)', value: 'N/A', desc: 'ไม่ได้อยู่ในขอบเขตงาน', dotColor: 'bg-slate-300', visible: true }
+                            ],
+                            transformer: {
+                                size: '250 kVA',
+                                serial: 'GF275849',
+                                oilValue: '42.4',
+                                oilStatusText: 'Excellent',
+                                oilStatusClass: 'text-emerald-600 bg-emerald-50 border-emerald-200',
+                                oilBarWidth: '100%',
+                                oilBarColor: 'bg-emerald-500',
+                                oilBarTextColor: 'text-emerald-600',
+                                oilNote: 'ค่าความเป็นฉนวนน้ำมันสูงมาก (42.4 kV) ผ่านมาตรฐานดีเยี่ยม ไม่มีสัญญาณความชื้นปนเปื้อน',
+                                insulation: [
+                                    { label: 'HV - Ground', value: '5.87 GΩ' },
+                                    { label: 'LV - Ground', value: '5.78 GΩ' },
+                                    { label: 'HV - LV Winding', value: '5.69 GΩ' }
+                                ]
+                            },
+                            generalInspection: {
+                                visible: true,
+                                title: 'การตรวจสอบทั่วไป (General Inspection)',
+                                subtitle: 'สภาพภายนอกและการบำรุงรักษา',
+                                rows: [
+                                    { item: 'ความสะอาด (Cleaning)', desc: 'ทำความสะอาดขั้วต่อสายและลูกถ้วยที่สกปรกเรียบร้อยแล้ว', subtext: 'Condition: Cleaned' },
+                                    { item: 'รอยรั่วซึม (Leakage)', desc: 'ตรวจสอบตัวถังและครีบระบายความร้อน ไม่พบรอยรั่ว', subtext: 'Result: Normal' },
+                                    { item: 'แรงดันไฟฟ้า (Voltage)', desc: 'แรงดันไฟฟ้าขาออกสม่ำเสมอ (231V, 232V, 233V)', subtext: 'Result: Balanced' },
+                                    { item: 'สารดูดความชื้น (Silica Gel)', desc: 'เม็ดสารยังเป็นสีน้ำเงิน (พร้อมใช้งาน)', subtext: 'Result: Good' }
+                                ]
+                            },
+                            capacitor: { visible: false },
+                            actionPlan: [
+                                { priority: 'Routine', title: 'บำรุงรักษาปกติ', desc: 'ดำเนินการทำความสะอาด Bushing และขั้วต่อสายครบถ้วน' },
+                                { priority: 'Monitor', title: 'ติดตามการใช้งาน', desc: 'หม้อแปลงรับโหลดได้ปกติ ไม่พบเสียงครางหรืออุณหภูมิผิดปกติ' },
+                                { priority: 'Next PM', title: 'แผนปีถัดไป', desc: 'แนะนำตรวจสอบประจำปีตามรอบปกติ (ตุลาคม 2569)' }
+                            ]
+                        }
+                    }
+                }
+            },
+            computed: {
+                company() {
+                    return this.db[this.currentCompanyId];
+                }
+            },
+            updated() {
+                lucide.createIcons();
+            },
+            mounted() {
+                lucide.createIcons();
+            }
+        }).mount('#app');
     </script>
 </body>
 </html>
