@@ -17,6 +17,7 @@
             .no-print { display: none !important; }
             .shadow-xl { box-shadow: none !important; }
             .border { border-color: #e2e8f0 !important; }
+            .break-inside-avoid { page-break-inside: avoid; }
         }
     </style>
 </head>
@@ -28,7 +29,7 @@
             <!-- Header Section -->
             <header class="text-white transition-colors duration-500" :class="company.headerColor">
                 
-                <!-- Top Bar: Company Switcher (Integrated & No Overlap) -->
+                <!-- Top Bar: Company Switcher -->
                 <div class="bg-black/20 px-8 py-3 flex flex-col md:flex-row justify-between items-center gap-3 border-b border-white/10 no-print">
                     <span class="text-[10px] uppercase font-bold tracking-widest text-white/60">Select Project Site:</span>
                     
@@ -96,7 +97,7 @@
             <div class="p-6 md:p-12 space-y-10">
 
                 <!-- Section 1: Transformer -->
-                <section>
+                <section class="break-inside-avoid">
                     <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-3">
                         <div class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-sm">1</div>
                         <div>
@@ -222,6 +223,59 @@
                     </div>
                 </section>
 
+                <!-- Section 4: ThermoScan (Corrected) -->
+                <section v-if="company.thermoscan && company.thermoscan.visible" class="break-inside-avoid">
+                    <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-3">
+                        <div class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-sm">4</div>
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-800">การตรวจสอบความร้อน (ThermoScan)</h2>
+                            <p class="glossary-text">ตรวจจับจุดร้อนผิดปกติด้วยกล้องอินฟราเรด • ตรวจสอบเมื่อ: {{ company.thermoscan.date }}</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm flex flex-col md:flex-row">
+                        <!-- Summary Stats -->
+                        <div class="bg-slate-50 p-6 md:w-1/3 border-b md:border-b-0 md:border-r border-slate-200 flex flex-col justify-center">
+                            <h3 class="text-xs uppercase font-bold text-slate-400 tracking-wider mb-4">ThermoScan Summary</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-slate-600">จุดตรวจสอบทั้งหมด</span>
+                                    <span class="font-bold text-slate-800">8 จุด</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-slate-600 flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-emerald-500"></div> ปกติ (Normal)</span>
+                                    <span class="font-bold text-emerald-600">8 จุด</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-slate-600 flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-slate-300"></div> ผิดปกติ (Critical)</span>
+                                    <span class="font-bold text-slate-400">0 จุด</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Findings -->
+                        <div class="p-6 md:w-2/3">
+                            <h3 class="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                <i data-lucide="eye" class="w-4 h-4 text-blue-500"></i> ข้อสังเกต (Observation)
+                            </h3>
+                            
+                            <div class="bg-blue-50 border border-blue-100 rounded-lg p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="text-xs font-bold bg-blue-100 text-blue-700 px-2 py-1 rounded uppercase tracking-wide">Monitor Only</span>
+                                    <span class="text-xs text-blue-600 font-mono">Max Temp: 46.8°C</span>
+                                </div>
+                                <h4 class="font-bold text-slate-800 text-sm mb-1">Capacitor Cable (Phase B)</h4>
+                                <p class="text-sm text-slate-600 mb-2">
+                                    ตรวจพบอุณหภูมิ 46.8°C (สูงกว่าจุดอ้างอิงเล็กน้อย) แต่ผลต่างอุณหภูมิ (Delta T) อยู่ที่ 4.1°C ซึ่งอยู่ในเกณฑ์ปกติ
+                                </p>
+                                <div class="text-xs text-slate-500 bg-white/60 p-2 rounded">
+                                    <strong>Engineering Note:</strong> อุณหภูมิ 46.8°C ถือเป็นอุณหภูมิใช้งานปกติ (Normal Operating Temp) สำหรับสายไฟโหลดเต็มพิกัด ไม่ใช่จุดอันตราย
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Action Plan -->
                 <section class="break-inside-avoid bg-slate-900 text-white rounded-xl p-8 relative overflow-hidden shadow-xl">
                     <div class="absolute top-0 right-0 w-96 h-96 bg-blue-500/20 rounded-full mix-blend-overlay filter blur-3xl opacity-30 -translate-y-1/2 translate-x-1/3"></div>
@@ -275,7 +329,7 @@
                                 serial: '4950374',
                                 oilValue: '26.6',
                                 oilStatusText: 'Monitor',
-                                oilStatusClass: 'text-amber-600 bg-amber-50 border-amber-200',
+                                oilStatusClass: 'bg-amber-100 text-amber-800',
                                 oilBarWidth: '88%',
                                 oilBarColor: 'bg-amber-500',
                                 oilBarTextColor: 'text-amber-600',
@@ -305,9 +359,13 @@
                                 hasIssue: true,
                                 issueText: 'Capacitor ตัวที่ 5 เสื่อมสภาพ (-15.62%) ตัดวงจร (Cut-off) ออกแล้ว รอเปลี่ยนอะไหล่'
                             },
+                            thermoscan: {
+                                visible: true,
+                                date: '4 พฤศจิกายน 2568'
+                            },
                             actionPlan: [
                                 { priority: 'Priority: High', title: 'เฝ้าระวังพิเศษ', desc: 'ตรวจสอบสารดูดความชื้น (Silica Gel) ทุกเดือน' },
-                                { priority: 'Priority: Medium', title: 'งานซ่อมบำรุง', desc: 'เปลี่ยน Capacitor No.5 (ดำเนินการเอง)' },
+                                { priority: 'Priority: Medium', title: 'งานซ่อมบำรุง', desc: 'เปลี่ยน Capacitor No.5' },
                                 { priority: 'Long Term', title: 'ติดตามผล', desc: 'ปีหน้าหากค่าน้ำมันต่ำกว่า 22-24 kV ให้พิจารณากรองน้ำมัน' }
                             ]
                         },
@@ -345,12 +403,13 @@
                                 subtitle: 'สภาพภายนอกและการบำรุงรักษา',
                                 rows: [
                                     { item: 'ความสะอาด (Cleaning)', desc: 'ทำความสะอาดขั้วต่อสายและลูกถ้วยที่สกปรกเรียบร้อยแล้ว', subtext: 'Condition: Cleaned' },
-                                    { item: 'รอยรั่วซึม (Leakage)', desc: 'ตรวจสอบตัวถังและครีบระบายความร้อน ไม่พบรอยรั่ว', subtext: 'Result: Normal' },
-                                    { item: 'แรงดันไฟฟ้า (Voltage)', desc: 'แรงดันไฟฟ้าขาออกสม่ำเสมอ (231V, 232V, 233V)', subtext: 'Result: Balanced' },
-                                    { item: 'สารดูดความชื้น (Silica Gel)', desc: 'เม็ดสารยังเป็นสีน้ำเงิน (พร้อมใช้งาน)', subtext: 'Result: Good' }
+                                    { item: 'รอยรั่วซึม (Leakage)', desc: 'ตรวจสอบตัวถังและครีบระบายความร้อน ไม่พบรอยรั่ว', subtext: 'Status: Normal' },
+                                    { item: 'แรงดันไฟฟ้า (Voltage)', desc: 'แรงดันไฟฟ้าขาออกสม่ำเสมอ (231V, 232V, 233V)', subtext: 'Status: Balanced' },
+                                    { item: 'สารดูดความชื้น (Silica Gel)', desc: 'เม็ดสารยังเป็นสีน้ำเงิน (พร้อมใช้งาน)', subtext: 'Status: Good' }
                                 ]
                             },
                             capacitor: { visible: false },
+                            thermoscan: { visible: false },
                             actionPlan: [
                                 { priority: 'Routine', title: 'บำรุงรักษาปกติ', desc: 'ดำเนินการทำความสะอาด Bushing และขั้วต่อสายครบถ้วน' },
                                 { priority: 'Monitor', title: 'ติดตามการใช้งาน', desc: 'หม้อแปลงรับโหลดได้ปกติ ไม่พบเสียงครางหรืออุณหภูมิผิดปกติ' },
